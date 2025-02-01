@@ -4,3 +4,11 @@
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+*.env
+*.env.ts
+.env*.local
+.DS_Store
+
+/node_modules
+*.tsbuildinfo
