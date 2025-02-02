@@ -8,13 +8,18 @@ export class PhotosStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props)
 
-    new Bucket(this, 'PhotosBucket')
+    //call the function
+    this.initializeSuffix()
+
+    new Bucket(this, 'PhotosBucket', {
+      bucketName: `photos-bucket-${this.stackSuffix}`,
+    })
   }
 
-  private initializeSufix() {
+  private initializeSuffix() {
     //grab data in the index 2
     const shortStackId = cdk.Fn.select(2, cdk.Fn.split('/', this.stackId))
     //grab data in the index 4
-    this.stackSuffix = cdk.Fn.select(4, cdk.Fn.split('-', this.stackId))
+    this.stackSuffix = cdk.Fn.select(4, cdk.Fn.split('-', shortStackId))
   }
 }
