@@ -34,13 +34,19 @@ export class Cdk1Stack extends cdk.Stack {
     })
 
     // create L2 level constructor
-    new Bucket(this, 'MyL2Bucket', {
+    const MyL2Bucket = new Bucket(this, 'MyL2Bucket', {
       //expired based on time and auto-delete
       lifecycleRules: [
         {
           expiration: cdk.Duration.days(2),
         },
       ],
+    })
+    // console.log('🚀 MyL2Bucket:', MyL2Bucket.bucketName) //this will give us ${Token[TOKEN.31]}, which is not useful
+
+    // log bucket name with CnOutput
+    new cdk.CfnOutput(this, 'MyL2BucketName', {
+      value: MyL2Bucket.bucketName,
     })
 
     // call L3 level constructor
