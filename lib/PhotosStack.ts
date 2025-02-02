@@ -11,8 +11,14 @@ export class PhotosStack extends cdk.Stack {
     //call the function
     this.initializeSuffix()
 
-    new Bucket(this, 'PhotosBucket', {
+    const photosBucket = new Bucket(this, 'PhotosBucket', {
       bucketName: `photos-bucket-${this.stackSuffix}`,
+    })
+
+    //the 'photos-bucket' is from the PhotosHandlerStack
+    new cdk.CfnOutput(this, 'photos-bucket', {
+      value: photosBucket.bucketArn,
+      exportName: 'photos-bucket',
     })
   }
 
