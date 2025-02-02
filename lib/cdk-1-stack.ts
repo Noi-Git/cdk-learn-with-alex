@@ -33,12 +33,19 @@ export class Cdk1Stack extends cdk.Stack {
       },
     })
 
+    const duration = new cdk.CfnParameter(this, 'duration', {
+      default: 6,
+      minValue: 1,
+      maxValue: 10,
+      type: 'Number',
+    })
+
     // create L2 level constructor
     const MyL2Bucket = new Bucket(this, 'MyL2Bucket', {
       //expired based on time and auto-delete
       lifecycleRules: [
         {
-          expiration: cdk.Duration.days(2),
+          expiration: cdk.Duration.days(duration.valueAsNumber),
         },
       ],
     })
