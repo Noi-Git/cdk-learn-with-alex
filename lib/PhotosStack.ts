@@ -17,6 +17,7 @@ export class PhotosStack extends cdk.Stack {
 
     //the 'photos-bucket' is from the PhotosHandlerStack
     new cdk.CfnOutput(this, 'photos-bucket', {
+      //use bucketArn for referance
       value: photosBucket.bucketArn,
       exportName: 'photos-bucket',
     })
